@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Quote } from "../components/QuoteType";
 
 export function Home() {
   const url = "https://quote-garden.herokuapp.com/api/v3/quotes/random";
-  //   const [quotes, setQuotes] = useState<Quote[]>([]);
-  const [randomQuoteText, setRandomQuoteText] = useState<string>();
-  const [randomQuoteAuthor, setRandomQuoteAuthor] = useState<string>();
-  const [randomQuoteGenre, setRandomQuoteGenre] = useState<string>();
+  const [quotes, setQuotes] = useState<Quote[]>([]);
   const [defaultAuthorNameStyle, setDefaultAuthorNameStyle] = useState(
     "text-base text-gray-700 w-full h-full font-bold"
   );
@@ -14,9 +12,7 @@ export function Home() {
   async function getRandomQuote() {
     const response = await fetch(url);
     const random_quote = await response.json();
-    setRandomQuoteText(random_quote.data[0].quoteText);
-    setRandomQuoteAuthor(random_quote.data[0].quoteAuthor);
-    setRandomQuoteGenre(random_quote.data[0].quoteGenre);
+    setQuotes(random_quote.data);
   }
 
   useEffect(() => {
@@ -44,30 +40,38 @@ export function Home() {
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="flex flex-col w-1/2 justify-center items-center">
-          <div className="flex w-full py-10 px-20 border-l-4 border-yellow-300">
-            <p className="text-xl w-2/3">“{randomQuoteText}”</p>
-          </div>
-          <div
-            className="w-4/5 p-10 mt-10 hover:bg-zinc-800 hover:cursor-pointer hover:text-white"
-            onMouseOver={handleHover}
-            onMouseLeave={handleMouseLeave}
-          >
-            <Link to={`/author/${randomQuoteAuthor}`}>
-              <div className="flex justify-between ">
-                <div className="flex flex-col">
-                  <span className={defaultAuthorNameStyle}>
-                    {randomQuoteAuthor}
-                  </span>
-                  <span className="text-xs text-gray-400 mt-2">
-                    {randomQuoteGenre}
-                  </span>
-                </div>
-                <span className="material-icons text-white">arrow_forward</span>
+        {quotes.map((quote) => {
+          return (
+            <div className="flex flex-col w-1/2 justify-center items-center">
+              <div className="flex w-full py-10 px-20 border-l-4 border-yellow-300">
+                <p key={1} className="text-xl w-2/3">
+                  “{quote.quoteText}”
+                </p>
               </div>
-            </Link>
-          </div>
-        </div>
+              <div
+                className="w-4/5 p-10 mt-10 hover:bg-zinc-800 hover:cursor-pointer hover:text-white"
+                onMouseOver={handleHover}
+                onMouseLeave={handleMouseLeave}
+              >
+                <Link key={2} to={`/author/${quote.quoteAuthor}`}>
+                  <div className="flex justify-between ">
+                    <div className="flex flex-col">
+                      <span key={3} className={defaultAuthorNameStyle}>
+                        {quote.quoteAuthor}
+                      </span>
+                      <span key={4} className="text-xs text-gray-400 mt-2">
+                        {quote.quoteGenre}
+                      </span>
+                    </div>
+                    <span className="material-icons text-white">
+                      arrow_forward
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
