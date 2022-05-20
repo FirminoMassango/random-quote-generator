@@ -5,7 +5,7 @@ export default function Footer() {
         created by{" "}
         <a
           className="text-yellow-500 font-semibold"
-          href="https://github.com/FirminoMassango/react-todo-app"
+          href="https://github.com/FirminoMassango/random-quote-generator"
         >
           Firmino Massango
         </a>{" "}
