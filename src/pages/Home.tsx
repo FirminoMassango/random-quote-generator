@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Quote } from "../components/QuoteType";
+import { Footer } from "../components/Footer";
 
 export function Home() {
   const url = "https://quote-garden.herokuapp.com/api/v3/quotes/random";
@@ -44,7 +45,7 @@ export function Home() {
           return (
             <div className="flex flex-col w-1/2 justify-center items-center">
               <div className="flex w-full py-10 px-20 border-l-4 border-yellow-300">
-                <p key={1} className="text-xl w-2/3">
+                <p key={1} className="text-xl w-full">
                   “{quote.quoteText}”
                 </p>
               </div>
@@ -72,6 +73,9 @@ export function Home() {
             </div>
           );
         })}
+      </div>
+      <div className="flex justify-center">
+        <Footer />
       </div>
     </div>
   );

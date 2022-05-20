@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Quote } from "../components/QuoteType";
+import Footer from "../components/Footer";
 
 export function Author() {
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const { authorName } = useParams();
-  const url =
-    "https://quote-garden.herokuapp.com/api/v3/quotes?author=Bill Gates";
+  const url = `https://quote-garden.herokuapp.com/api/v3/quotes?author=${authorName}`;
 
   async function getAuthorQuotes() {
     const response = await fetch(url);
@@ -28,7 +28,7 @@ export function Author() {
       </div>
 
       <div className="flex flex-col justify-center items-center">
-        <span className="mb-16 font-bold text-xl">Bill Gates {authorName}</span>
+        <span className="mb-16 font-bold text-xl">{authorName}</span>
         {quotes.map((quote) => {
           return (
             <div key={quote._id} className="w-full flex justify-center mb-10">
@@ -40,6 +40,7 @@ export function Author() {
             </div>
           );
         })}
+        <Footer />
       </div>
     </div>
   );

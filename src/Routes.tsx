@@ -8,7 +8,7 @@ export function AppRoutes() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/author/:id" element={<Author />} />
+        <Route path="/author/:authorName" element={<Author />} />
       </Routes>
     </Router>
   );
