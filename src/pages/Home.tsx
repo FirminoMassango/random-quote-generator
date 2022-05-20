@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Quote } from "../components/QuoteType";
+import { QuoteType } from "../helper/QuoteType";
 import Footer from "../components/Footer";
+import Quote from "../components/Quote";
 
 export function Home() {
   const url = "https://quote-garden.herokuapp.com/api/v3/quotes/random";
-  const [quotes, setQuotes] = useState<Quote[]>([]);
+  const [quotes, setQuotes] = useState<QuoteType[]>([]);
   const [defaultAuthorNameStyle, setDefaultAuthorNameStyle] = useState(
     "text-base text-gray-700 w-full h-full font-bold"
   );
@@ -43,24 +44,20 @@ export function Home() {
       <div className="flex justify-center">
         {quotes.map((quote) => {
           return (
-            <div className="flex flex-col w-1/2 justify-center items-center">
-              <div className="flex w-full py-10 px-20 border-l-4 border-yellow-300">
-                <p key={1} className="text-xl w-full">
-                  “{quote.quoteText}”
-                </p>
-              </div>
+            <div className="flex flex-col w-4/5 md:w-1/2 justify-center items-center">
+              <Quote quote={quote.quoteText} />
               <div
                 className="w-4/5 p-10 mt-10 hover:bg-zinc-800 hover:cursor-pointer hover:text-white"
                 onMouseOver={handleHover}
                 onMouseLeave={handleMouseLeave}
               >
-                <Link key={2} to={`/author/${quote.quoteAuthor}`}>
+                <Link to={`/author/${quote.quoteAuthor}`}>
                   <div className="flex justify-between ">
                     <div className="flex flex-col">
-                      <span key={3} className={defaultAuthorNameStyle}>
+                      <span className={defaultAuthorNameStyle}>
                         {quote.quoteAuthor}
                       </span>
-                      <span key={4} className="text-xs text-gray-400 mt-2">
+                      <span className="text-xs text-gray-400 mt-2">
                         {quote.quoteGenre}
                       </span>
                     </div>

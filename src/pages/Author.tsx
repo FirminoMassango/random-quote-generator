@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Quote } from "../components/QuoteType";
+import { QuoteType } from "../helper/QuoteType";
 import Footer from "../components/Footer";
+import Quote from "../components/Quote";
 
 export function Author() {
-  const [quotes, setQuotes] = useState<Quote[]>([]);
+  const [quotes, setQuotes] = useState<QuoteType[]>([]);
   const { authorName } = useParams();
   const url = `https://quote-garden.herokuapp.com/api/v3/quotes?author=${authorName}`;
 
@@ -32,10 +33,8 @@ export function Author() {
         {quotes.map((quote) => {
           return (
             <div key={quote._id} className="w-full flex justify-center mb-10">
-              <div className="flex flex-col w-2/5 justify-center items-center">
-                <div className="flex w-full py-10 px-16 border-l-4 border-yellow-300">
-                  <p className="text-xl w-full">“{quote.quoteText}”</p>
-                </div>
+              <div className="flex flex-col w-4/5 md:w-1/2 justify-center items-center">
+                <Quote quote={quote.quoteText} />
               </div>
             </div>
           );
