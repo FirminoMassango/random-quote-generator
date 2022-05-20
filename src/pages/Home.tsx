@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Quote } from "../components/QuoteType";
-import { Footer } from "../components/Footer";
+import Footer from "../components/Footer";
 
 export function Home() {
   const url = "https://quote-garden.herokuapp.com/api/v3/quotes/random";

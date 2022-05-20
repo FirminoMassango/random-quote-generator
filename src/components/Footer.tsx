@@ -1,4 +1,4 @@
-export function Footer() {
+export default function Footer() {
   return (
     <div className="mt-20 mb-5">
       <span className="text-gray-500 text-xs text-center">
